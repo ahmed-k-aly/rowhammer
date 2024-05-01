@@ -1,5 +1,3 @@
-import numpy as np
-
 import matplotlib.pyplot as plt
 
 # Initialize an empty list to store times
@@ -16,34 +14,10 @@ with open('results.txt', 'r') as file:
         # Append the time to the list
         times.append(float(time))
 
-# Create a histogram
-hist, bins = np.histogram(times, bins=100, range=(13, 38))
-
-# Calculate the center value
-center_value = np.mean(times)
-
-# Create a grid of values based on the histogram
-grid = np.zeros((10, 10))
-for i in range(10):
-    for j in range(10):
-        grid[i, j] = hist[i * 10 + j]
-
-# Plot the heatmap with a modified colormap
-plt.imshow(grid, cmap='plasma', interpolation='nearest')
-plt.colorbar(label='Frequency')
-plt.title('Time Frequency Heatmap')
-# Label the x and y axes   
+# Plot the data as a frequency histogram
+plt.hist(times, bins=50, range=(13, 38), edgecolor='black')
 plt.xlabel('Time')
+plt.xticks(range(13, 38, 5))  # Set x-axis ticks to increment by 5
 plt.ylabel('Frequency')
-plt.show()
-plt.imshow(grid, cmap='plasma', interpolation='nearest')
-plt.colorbar(label='Frequency')
-plt.title('Time Frequency Heatmap')
-
-# Label the x and y axes   
-plt.xlabel('Time')
-plt.ylabel('Frequency')
-
-
-
+plt.title('Time Frequency Histogram')
 plt.show()
