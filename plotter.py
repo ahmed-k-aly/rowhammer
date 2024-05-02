@@ -1,3 +1,5 @@
+import numpy as np
+
 import matplotlib.pyplot as plt
 
 # Initialize an empty list to store times
@@ -14,10 +16,12 @@ with open('results.txt', 'r') as file:
         # Append the time to the list
         times.append(float(time))
 
-# Plot the data as a frequency histogram
-plt.hist(times, bins=50, range=(13, 38), edgecolor='black')
-plt.xlabel('Time')
-plt.xticks(range(13, 38, 5))  # Set x-axis ticks to increment by 5
-plt.ylabel('Frequency')
-plt.title('Time Frequency Histogram')
+# Normalize the data
+normalized_times = (times - np.min(times)) / (np.max(times) - np.min(times))
+
+# Plot the data as a scatterplot
+plt.scatter(range(len(normalized_times)), normalized_times)
+plt.xlabel('Index')
+plt.ylabel('Normalized Time')
+plt.title('Normalized Time Scatterplot')
 plt.show()
